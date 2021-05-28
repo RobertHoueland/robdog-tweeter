@@ -9,6 +9,7 @@
 var path = require("path")
 var express = require("express")
 var exphbs = require("express-handlebars")
+var bodyParser = require("body-parser")
 
 var twitData = require("./twitData.json")
 

@@ -14,10 +14,12 @@
     "predev": "npm run build"
   },
   "dependencies": {
+    "body": "^5.1.0",
     "ejs": "^3.1.5",
     "express": "^4.15.2",
     "express-handlebars": "^5.3.2",
-    "handlebars": "^4.7.7"
+    "handlebars": "^4.7.7",
+    "parser": "^0.1.4"
   },
   "devDependencies": {
     "got": "^11.3.0",
