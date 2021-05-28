@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "build": "handlebars views/partial/twitTemplate.handlebars -f public/twitTemplate.js",
+    "build": "handlebars views/partials/twitTemplate.handlebars -f public/twitTemplate.js",
     "prestart": "npm run build",
     "predev": "npm run build"
   },
