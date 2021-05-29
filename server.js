@@ -17,7 +17,7 @@ var mongoURL =
     mongoUser +
     ":" +
     mongoPassword +
-    "@cluster0:41241.etpfv.mongodb.net/test"
+    "@cluster0.etpfv.mongodb.net:41241/test"
 var db
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }))
