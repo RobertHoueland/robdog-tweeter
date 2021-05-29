@@ -31,12 +31,14 @@ function handleModalAcceptClick() {
             author: twitAuthor,
         }
         allTwits.push(twitData)
+        
         var request = new XMLHttpRequest()
         var requestURL = "create"
         request.open("POST", requestURL)
         var requestBody = JSON.stringify(twitData)
         request.setRequestHeader("Content-Type", "application/json")
         request.send(requestBody)
+
         clearSearchAndReinsertTwits()
         hideCreateTwitModal()
     } else {

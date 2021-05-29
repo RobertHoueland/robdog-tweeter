@@ -51,7 +51,13 @@ app.post("/create", function (req, res) {
         if (err) {
             res.status(500).send("Error adding twit to DB.")
         }
-        console.log("Twit inserted")
+        console.log(
+            "==Twit inserted\n" +
+                "Text: " +
+                req.body.text +
+                "\nAuthor: " +
+                req.body.author
+        )
     })
 
     res.redirect("/")
