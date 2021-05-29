@@ -26,6 +26,10 @@ app.set("view engine", "handlebars")
 app.use(express.static("public"))
 
 app.get("/", function (req, res) {
+    var twits = db.collection("twits")
+    var twitCursor = twits.find({
+        text: req.params.text,
+    })
     res.status(200).render("twitPage", { twitPage: twitData })
 })
 
@@ -48,6 +52,8 @@ mongoClient.connect(
         app.listen(port, function () {
             console.log("== Server is listening on port", port)
         })
+        var twits = db.collection("twits")
+        var twitCursor = twits.find({})
         db.listCollections().toArray(function (err, collInfos) {
             console.log(collInfos)
         })
