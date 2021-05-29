@@ -27,9 +27,7 @@ app.use(express.static("public"))
 
 app.get("/", function (req, res) {
     var twits = db.collection("twits")
-    var twitCursor = twits.find({
-        text: req.params.text,
-    })
+    var twitCursor = twits.find({})
     res.status(200).render("twitPage", { twitPage: twitData })
 })
 
