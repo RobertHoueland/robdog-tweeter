@@ -17,25 +17,11 @@ var mongoURL =
     mongoUser +
     ":" +
     mongoPassword +
-    "@cluster0.etpfv.mongodb.net/test"
+    "@cluster0:41241.etpfv.mongodb.net/test"
 var db
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }))
 app.set("view engine", "handlebars")
-
-mongoClient.connect(
-    mongoURL,
-    { useNewUrlParser: true, useUnifiedTopology: true },
-    function (err, client) {
-        if (err) {
-            throw err
-        }
-        db = client.db("test")
-        app.listen(port, function () {
-            console.log("== Server is listening on port", port)
-        })
-    }
-)
 
 bodyParser.json()
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -75,3 +61,17 @@ app.get("/twits/:n", function (req, res) {
 app.get("*", function (req, res) {
     res.status(404).render("404")
 })
+
+mongoClient.connect(
+    mongoURL,
+    { useNewUrlParser: true, useUnifiedTopology: true },
+    function (err, client) {
+        if (err) {
+            throw err
+        }
+        db = client.db("test")
+        app.listen(port, function () {
+            console.log("== Server is listening on port", port)
+        })
+    }
+)
