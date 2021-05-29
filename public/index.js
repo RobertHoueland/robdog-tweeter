@@ -5,18 +5,8 @@ function insertNewTwit(twitText, twitAuthor) {
     }
 
     var twitHtml = Handlebars.templates.twitTemplate(templateContext)
-
     var twitContainer = document.querySelector(".twit-container")
     twitContainer.insertAdjacentHTML("beforeend", twitHtml)
-
-    var request = new XMLHttpRequest()
-    var requestURL = "create"
-    request.open("POST", requestURL)
-    var requestBody = JSON.stringify(templateContext)
-    request.setRequestHeader("Content-Type", "application/json")
-    request.send(requestBody)
-
-    //document.location.href = "/post"
 }
 
 var allTwits = []
@@ -36,10 +26,17 @@ function handleModalAcceptClick() {
      * text and the twit author.  Give them an alert if they didn't.
      */
     if (twitText && twitAuthor) {
-        allTwits.push({
+        var twitData = {
             text: twitText,
             author: twitAuthor,
-        })
+        }
+        allTwits.push(twitData)
+        var request = new XMLHttpRequest()
+        var requestURL = "create"
+        request.open("POST", requestURL)
+        var requestBody = JSON.stringify(twitData)
+        request.setRequestHeader("Content-Type", "application/json")
+        request.send(requestBody)
         clearSearchAndReinsertTwits()
         hideCreateTwitModal()
     } else {

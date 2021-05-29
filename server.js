@@ -41,20 +41,18 @@ app.get("/", function (req, res) {
 })
 
 app.post("/create", function (req, res) {
-    console.log(req.body.text)
-    console.log(req.body.author)
     var twit = {
-        //text: req.body.text,
-        //author: req.body.author,
+        text: req.body.text,
+        author: req.body.author,
     }
 
     var twits = db.collection("twits")
-    /*twits.insertOne(twit, function (err, result) {
+    twits.insertOne(twit, function (err, result) {
         if (err) {
             res.status(500).send("Error adding twit to DB.")
         }
         console.log("Twit inserted")
-    })*/
+    })
 
     res.redirect("/")
 })
