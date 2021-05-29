@@ -8,8 +8,7 @@ function insertNewTwit(twitText, twitAuthor) {
 
     var twitContainer = document.querySelector(".twit-container")
     twitContainer.insertAdjacentHTML("beforeend", twitHtml)
-
-    // return twitHtml
+    document.location.href = "/post"
 }
 
 var allTwits = []

@@ -9,6 +9,7 @@ var app = express()
 var port = process.env.PORT || 3000
 
 var mongoClient = require("mongodb").MongoClient
+const { nextTick } = require("process")
 var mongoUser = process.env.MONGO_USER
 var mongoPassword = process.env.MONGO_PASSWORD
 var mongoURL =
@@ -17,7 +18,6 @@ var mongoURL =
     ":" +
     mongoPassword +
     "@cluster0.etpfv.mongodb.net/test"
-
 var db
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }))
@@ -37,6 +37,9 @@ mongoClient.connect(
     }
 )
 
+bodyParser.json()
+app.use(bodyParser.urlencoded({ extended: false }))
+
 app.use(express.static("public"))
 
 app.get("/", function (req, res) {
@@ -44,11 +47,25 @@ app.get("/", function (req, res) {
     twits
         .find()
         .toArray()
-        .then((results) => {
-            console.log(results)
+        .then((twitDB) => {
+            res.status(200).render("twitPage", { twitPage: twitDB })
         })
         .catch((error) => console.error(error))
-    res.status(200).render("twitPage", { twitPage: twitData })
+})
+
+app.get("/post", function (req, res) {
+    console.log(req.body)
+    var twit = {
+        //text: req.body.text,
+        //author: req.body.author,
+    }
+
+    var twits = db.collection("twits")
+    twits.insertOne(twit, function (err, result) {
+        console.log("Twit inserted")
+    })
+
+    res.redirect("/")
 })
 
 app.get("/twits/:n", function (req, res) {
