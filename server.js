@@ -12,19 +12,19 @@ var mongoClient = require("mongodb").MongoClient
 const { nextTick } = require("process")
 var mongoUser = process.env.MONGO_USER
 var mongoPassword = process.env.MONGO_PASSWORD
-/*var mongoURL =
+var mongoURL =
+    process.env.MONGODB_URL ||
     "mongodb+srv://" +
-    mongoUser +
-    ":" +
-    mongoPassword +
-    "@cluster0.etpfv.mongodb.net/test?retryWrites=true&w=majority?authSource=admin"*/
-var mongoURL = process.env.MONGODB_URL
+        mongoUser +
+        ":" +
+        mongoPassword +
+        "@cluster0.etpfv.mongodb.net/test?retryWrites=true&w=majority?authSource=admin"
 var db
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }))
 app.set("view engine", "handlebars")
 
-bodyParser.json()
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(express.static("public"))
@@ -40,17 +40,21 @@ app.get("/", function (req, res) {
         .catch((error) => console.error(error))
 })
 
-app.get("/post", function (req, res) {
-    console.log(req.body)
+app.post("/create", function (req, res) {
+    console.log(req.body.text)
+    console.log(req.body.author)
     var twit = {
         //text: req.body.text,
         //author: req.body.author,
     }
 
     var twits = db.collection("twits")
-    twits.insertOne(twit, function (err, result) {
+    /*twits.insertOne(twit, function (err, result) {
+        if (err) {
+            res.status(500).send("Error adding twit to DB.")
+        }
         console.log("Twit inserted")
-    })
+    })*/
 
     res.redirect("/")
 })

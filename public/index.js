@@ -8,7 +8,15 @@ function insertNewTwit(twitText, twitAuthor) {
 
     var twitContainer = document.querySelector(".twit-container")
     twitContainer.insertAdjacentHTML("beforeend", twitHtml)
-    document.location.href = "/post"
+
+    var request = new XMLHttpRequest()
+    var requestURL = "create"
+    request.open("POST", requestURL)
+    var requestBody = JSON.stringify(templateContext)
+    request.setRequestHeader("Content-Type", "application/json")
+    request.send(requestBody)
+
+    //document.location.href = "/post"
 }
 
 var allTwits = []
