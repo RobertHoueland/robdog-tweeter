@@ -12,12 +12,13 @@ var mongoClient = require("mongodb").MongoClient
 const { nextTick } = require("process")
 var mongoUser = process.env.MONGO_USER
 var mongoPassword = process.env.MONGO_PASSWORD
-var mongoURL =
+/*var mongoURL =
     "mongodb+srv://" +
     mongoUser +
     ":" +
     mongoPassword +
-    "@cluster0.etpfv.mongodb.net/test?retryWrites=true&w=majority?authSource=admin"
+    "@cluster0.etpfv.mongodb.net/test?retryWrites=true&w=majority?authSource=admin"*/
+var mongoURL = process.env.MONGODB_URL
 var db
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }))
