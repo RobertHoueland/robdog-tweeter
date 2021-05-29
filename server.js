@@ -30,6 +30,12 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static("public"))
 
 app.get("/", function (req, res) {
+    console.log(
+        "== Request from " +
+            req.socket.remoteAddress +
+            " " +
+            req.header("user-agent")
+    )
     var twits = db.collection("twits")
     twits
         .find()
@@ -37,7 +43,12 @@ app.get("/", function (req, res) {
         .then((twitDB) => {
             res.status(200).render("twitPage", { twitPage: twitDB })
         })
-        .catch((error) => console.error(error))
+        .catch(
+            (error) => (
+                console.error(error),
+                res.status(500).send("Error fetching twits from DB.")
+            )
+        )
 })
 
 app.post("/create", function (req, res) {
@@ -52,7 +63,7 @@ app.post("/create", function (req, res) {
             res.status(500).send("Error adding twit to DB.")
         }
         console.log(
-            "==Twit inserted\n" +
+            "== Twit inserted\n" +
                 "Text: " +
                 req.body.text +
                 "\nAuthor: " +
