@@ -17,7 +17,7 @@ var mongoURL =
     mongoUser +
     ":" +
     mongoPassword +
-    "@cluster0.etpfv.mongodb.net/test?retryWrites=true&w=majority"
+    "@cluster0.etpfv.mongodb.net/test?retryWrites=true&w=majority?authSource=admin"
 var db
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }))
