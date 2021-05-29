@@ -18,16 +18,36 @@ var mongoURL =
     mongoPassword +
     "@cluster0.etpfv.mongodb.net/test"
 
-var mongoDBDatabase
+var db
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }))
 app.set("view engine", "handlebars")
+
+mongoClient.connect(
+    mongoURL,
+    { useNewUrlParser: true, useUnifiedTopology: true },
+    function (err, client) {
+        if (err) {
+            throw err
+        }
+        db = client.db("test")
+        app.listen(port, function () {
+            console.log("== Server is listening on port", port)
+        })
+    }
+)
 
 app.use(express.static("public"))
 
 app.get("/", function (req, res) {
     var twits = db.collection("twits")
-    var twitCursor = twits.find({})
+    twits
+        .find()
+        .toArray()
+        .then((results) => {
+            console.log(results)
+        })
+        .catch((error) => console.error(error))
     res.status(200).render("twitPage", { twitPage: twitData })
 })
 
@@ -38,22 +58,3 @@ app.get("/twits/:n", function (req, res) {
 app.get("*", function (req, res) {
     res.status(404).render("404")
 })
-
-mongoClient.connect(
-    mongoURL,
-    { useNewUrlParser: true, useUnifiedTopology: true },
-    function (err, client) {
-        if (err) {
-            throw err
-        }
-        db = mongoDBDatabase = client.db("test")
-        app.listen(port, function () {
-            console.log("== Server is listening on port", port)
-        })
-        var twits = db.collection("twits")
-        var twitCursor = twits.find({})
-        db.listCollections().toArray(function (err, collInfos) {
-            console.log(collInfos)
-        })
-    }
-)
