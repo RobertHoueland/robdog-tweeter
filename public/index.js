@@ -200,6 +200,15 @@ function parseTwitElem(twitElem) {
     return twit
 }
 
+function darkToggle() {
+    var theme = document.querySelector("#theme")
+    if (theme.getAttribute("href") == "style.css") {
+        theme.href = "dark-style.css"
+    } else {
+        theme.href = "style.css"
+    }
+}
+
 /*
  * Wait until the DOM content is loaded, and then hook up UI interactions, etc.
  */
@@ -244,5 +253,10 @@ window.addEventListener("DOMContentLoaded", function () {
     var searchInput = document.getElementById("navbar-search-input")
     if (searchInput) {
         searchInput.addEventListener("input", doSearchUpdate)
+    }
+
+    var darkButton = document.querySelector(".dark-theme")
+    if (darkButton) {
+        darkButton.addEventListener("click", darkToggle)
     }
 })
