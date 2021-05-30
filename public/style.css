@@ -128,6 +128,13 @@ a:focus {
     font-weight: bold;
 }
 
+.twit-content .twit-time {
+    font-style: italic;
+    font-size: 15px;
+    margin-top: 10px;
+    float: left;
+}
+
 #create-twit-button {
     position: fixed;
     right: 30px;

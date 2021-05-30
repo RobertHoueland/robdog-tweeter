@@ -1,7 +1,8 @@
-function insertNewTwit(twitText, twitAuthor) {
+function insertNewTwit(twitText, twitAuthor, twitTime) {
     var templateContext = {
         text: twitText,
         author: twitAuthor,
+        time: twitTime,
     }
 
     var twitHtml = Handlebars.templates.twitTemplate(templateContext)
@@ -10,6 +11,29 @@ function insertNewTwit(twitText, twitAuthor) {
 }
 
 var allTwits = []
+
+function getTime() {
+    var currentDate = new Date()
+    var hours = currentDate.getHours()
+    var minutes = currentDate.getMinutes()
+    var ampm = hours >= 12 ? "pm" : "am"
+    hours = hours % 12
+    hours = hours ? hours : 12
+    minutes = minutes < 10 ? "0" + minutes : minutes
+    var twitTime =
+        currentDate.getMonth() +
+        1 +
+        "/" +
+        currentDate.getDate() +
+        "/" +
+        currentDate.getFullYear() +
+        " " +
+        hours +
+        ":" +
+        minutes +
+        ampm
+    return twitTime
+}
 
 /*
  * This function checks whether all of the required inputs were supplied by
@@ -21,6 +45,7 @@ function handleModalAcceptClick() {
     var twitText = document.getElementById("twit-text-input").value
     var twitAuthor = document.getElementById("twit-author-input").value
 
+    var twitTime = getTime()
     /*
      * Only generate the new twit if the user supplied values for both the twit
      * text and the twit author.  Give them an alert if they didn't.
@@ -29,6 +54,7 @@ function handleModalAcceptClick() {
         var twitData = {
             text: twitText,
             author: twitAuthor,
+            time: twitTime,
         }
         allTwits.push(twitData)
 
@@ -144,7 +170,7 @@ function doSearchUpdate() {
      */
     allTwits.forEach(function (twit) {
         if (twitMatchesSearchQuery(twit, searchQuery)) {
-            insertNewTwit(twit.text, twit.author)
+            insertNewTwit(twit.text, twit.author, twit.time)
         }
     })
 }
@@ -164,6 +190,9 @@ function parseTwitElem(twitElem) {
 
     var twitTextElem = twitElem.querySelector(".twit-text")
     twit.text = twitTextElem.textContent.trim()
+
+    var twitTimeElem = twitElem.querySelector(".twit-time")
+    twit.time = twitTimeElem.textContent.trim()
 
     var twitAuthorLinkElem = twitElem.querySelector(".twit-author a")
     twit.author = twitAuthorLinkElem.textContent.trim()

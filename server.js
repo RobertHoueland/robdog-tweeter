@@ -57,6 +57,7 @@ app.post("/create", function (req, res) {
     var twit = {
         text: req.body.text,
         author: req.body.author,
+        time: req.body.time,
     }
 
     var twits = db.collection("twits")
@@ -69,7 +70,9 @@ app.post("/create", function (req, res) {
                 "Text: " +
                 req.body.text +
                 "\nAuthor: " +
-                req.body.author
+                req.body.author +
+                "\nTime: " +
+                req.body.time
         )
     })
 
