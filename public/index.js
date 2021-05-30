@@ -31,7 +31,7 @@ function handleModalAcceptClick() {
             author: twitAuthor,
         }
         allTwits.push(twitData)
-        
+
         var request = new XMLHttpRequest()
         var requestURL = "create"
         request.open("POST", requestURL)

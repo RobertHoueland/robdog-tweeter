@@ -37,8 +37,10 @@ app.get("/", function (req, res) {
             req.header("user-agent")
     )
     var twits = db.collection("twits")
+    var mySort = { _id: -1 }
     twits
         .find()
+        .sort(mySort)
         .toArray()
         .then((twitDB) => {
             res.status(200).render("twitPage", { twitPage: twitDB })
