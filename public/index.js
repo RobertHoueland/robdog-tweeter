@@ -7,7 +7,7 @@ function insertNewTwit(twitText, twitAuthor, twitTime) {
 
     var twitHtml = Handlebars.templates.twitTemplate(templateContext)
     var twitContainer = document.querySelector(".twit-container")
-    twitContainer.insertAdjacentHTML("beforeend", twitHtml)
+    twitContainer.insertAdjacentHTML("afterbegin", twitHtml)
 }
 
 var allTwits = []
