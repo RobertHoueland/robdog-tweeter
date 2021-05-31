@@ -2,7 +2,6 @@ require("dotenv").config()
 var path = require("path")
 var express = require("express")
 var exphbs = require("express-handlebars")
-var twitData = require("./twitData.json")
 var bodyParser = require("body-parser")
 
 var app = express()
@@ -68,7 +67,7 @@ app.post("/create", function (req, res) {
         console.log(
             "== Twit inserted\n" +
                 "Text: " +
-                req.body.text +
+              req.body.text +
                 "\nAuthor: " +
                 req.body.author +
                 "\nTime: " +
@@ -80,7 +79,7 @@ app.post("/create", function (req, res) {
 })
 
 app.get("/twits/:n", function (req, res) {
-    res.status(200).render("twitPage", { twitPage: twitData })
+    //res.status(200).render("twitPage", { twitPage: twitData })
 })
 
 app.get("*", function (req, res) {
