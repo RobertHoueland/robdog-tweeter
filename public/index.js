@@ -201,14 +201,18 @@ function parseTwitElem(twitElem) {
 }
 
 function darkToggle() {
-    var theme = document.querySelector("#theme")
+    var currentTheme = document.querySelector("#theme")
     var darkButton = document.querySelector(".dark-theme")
-    if (theme.getAttribute("href") == "style.css") {
+    if (currentTheme.getAttribute("href") == "style.css") {
         darkButton.innerHTML = '<i class="fas fa-moon"></i>'
-        theme.href = "dark-style.css"
+        currentTheme.href = "dark-style.css"
+        let theme = "dark"
+        localStorage.setItem("theme", theme)
     } else {
         darkButton.innerHTML = '<i class="far fa-moon"></i>'
-        theme.href = "style.css"
+        currentTheme.href = "style.css"
+        let theme = "light"
+        localStorage.setItem("theme", theme)
     }
 }
 
@@ -256,6 +260,11 @@ window.addEventListener("DOMContentLoaded", function () {
     var searchInput = document.getElementById("navbar-search-input")
     if (searchInput) {
         searchInput.addEventListener("input", doSearchUpdate)
+    }
+
+    const currentTheme = localStorage.getItem("theme")
+    if (currentTheme == "dark") {
+        darkToggle()
     }
 
     var darkButton = document.querySelector(".dark-theme")

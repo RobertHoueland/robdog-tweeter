@@ -18,6 +18,11 @@
             crossorigin="anonymous"
         />
 
+        <script>
+            // Render blocking JS: if (localStorage.theme)
+            document.documentElement.setAttribute("theme", localStorage.theme);
+        </script>
+
         <link rel="stylesheet" href="style.css" media="screen" id="theme" />
 
         <link rel="shortcut icon" href="favicon.ico" />
