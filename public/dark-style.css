@@ -25,6 +25,7 @@ a {
 
 .dark-theme {
     position: absolute;
+    display: inline;
     margin-top: 75px;
     right: 30px;
     top: 30px;
