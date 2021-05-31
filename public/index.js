@@ -262,13 +262,4 @@ window.addEventListener("DOMContentLoaded", function () {
     if (darkButton) {
         darkButton.addEventListener("click", darkToggle)
     }
-    
-    if (
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-    ) {
-        darkToggle()
-    }
 })
-
-window.onload = function () {}
