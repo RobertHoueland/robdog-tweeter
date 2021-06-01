@@ -50,7 +50,7 @@ app.get("/", function (req, res) {
         .catch(
             (error) => (
                 console.error(error),
-                res.status(500).send("Error fetching twits from DB.")
+                res.status(500).send("Error fetching twits from database.")
             )
         )
 })
@@ -65,7 +65,7 @@ app.post("/create", function (req, res) {
     var twits = db.collection("twits")
     twits.insertOne(twit, function (err, result) {
         if (err) {
-            res.status(500).send("Error adding twit to DB.")
+            res.status(500).send("Error adding twit to database.")
         }
         console.log(
             "== Twit inserted from " +
@@ -84,7 +84,7 @@ app.post("/create", function (req, res) {
     res.redirect("/")
 })
 
-app.get("/twits/:n", function (req, res, next) {
+app.get("/twits/:n", function (req, res) {
     var twit = req.params.n.toLowerCase()
     var twits = db.collection("twits")
     var mySort = { _id: -1 }
@@ -96,13 +96,19 @@ app.get("/twits/:n", function (req, res, next) {
             if (twitDB[twit]) {
                 res.status(200).render("twitPage", twitDB[twit])
             } else {
-                next()
+                console.log(
+                    "== 404 Request from " +
+                        req.socket.remoteAddress +
+                        " " +
+                        req.header("user-agent")
+                )
+                res.status(404).render("404")
             }
         })
         .catch(
             (error) => (
                 console.error(error),
-                res.status(500).send("Error fetching twits from DB.")
+                res.status(500).send("Error fetching twits from database.")
             )
         )
 })
