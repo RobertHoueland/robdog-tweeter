@@ -1,13 +1,10 @@
- <main class="twit-container">
-    {{#each twitPage}}
+<main class="twit-container">
     {{#if displayAll}}
         {{#each twitPage}}
             {{> twitTemplate}}
         {{/each}}
     {{else}}
         {{> twitTemplate}}
-    {{/each}}
-</main>
     {{/if}}
 </main>
 
