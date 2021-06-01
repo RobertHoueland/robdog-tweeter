@@ -1,5 +1,9 @@
 <main class="twit-container">
-    {{#each twitPage}}
+    {{#if displayAll}}
+        {{#each twitPage}}
+            {{> twitTemplate}}
+        {{/each}}
+    {{else}}
         {{> twitTemplate}}
-    {{/each}}
+    {{/if}}
 </main>

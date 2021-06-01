@@ -5,7 +5,7 @@ var exphbs = require("express-handlebars")
 var bodyParser = require("body-parser")
 
 var app = express()
-var port = process.env.PORT || 3000
+var port = process.env.PORT || 5000
 
 var mongoClient = require("mongodb").MongoClient
 const { nextTick } = require("process")
@@ -42,7 +42,10 @@ app.get("/", function (req, res) {
         .sort(mySort)
         .toArray()
         .then((twitDB) => {
-            res.status(200).render("twitPage", { twitPage: twitDB })
+            res.status(200).render("twitPage", {
+                displayAll: true,
+                twitPage: twitDB,
+            })
         })
         .catch(
             (error) => (
@@ -65,9 +68,12 @@ app.post("/create", function (req, res) {
             res.status(500).send("Error adding twit to DB.")
         }
         console.log(
-            "== Twit inserted\n" +
-                "Text: " +
-              req.body.text +
+            "== Twit inserted from " +
+                req.socket.remoteAddress +
+                " " +
+                req.header("user-agent") +
+                "\nText: " +
+                req.body.text +
                 "\nAuthor: " +
                 req.body.author +
                 "\nTime: " +
@@ -78,11 +84,36 @@ app.post("/create", function (req, res) {
     res.redirect("/")
 })
 
-app.get("/twits/:n", function (req, res) {
-    //res.status(200).render("twitPage", { twitPage: twitData })
+app.get("/twits/:n", function (req, res, next) {
+    var twit = req.params.n.toLowerCase()
+    var twits = db.collection("twits")
+    var mySort = { _id: -1 }
+    twits
+        .find()
+        .sort(mySort)
+        .toArray()
+        .then((twitDB) => {
+            if (twitDB[twit]) {
+                res.status(200).render("twitPage", twitDB[twit])
+            } else {
+                next()
+            }
+        })
+        .catch(
+            (error) => (
+                console.error(error),
+                res.status(500).send("Error fetching twits from DB.")
+            )
+        )
 })
 
 app.get("*", function (req, res) {
+    console.log(
+        "== 404 Request from " +
+            req.socket.remoteAddress +
+            " " +
+            req.header("user-agent")
+    )
     res.status(404).render("404")
 })
 
