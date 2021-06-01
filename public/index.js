@@ -203,14 +203,14 @@ function parseTwitElem(twitElem) {
 function darkToggle() {
     var currentTheme = document.querySelector("#theme")
     var darkButton = document.querySelector(".dark-theme")
-    if (currentTheme.getAttribute("href") == "style.css") {
+    if (currentTheme.getAttribute("href") == "/style.css") {
         darkButton.innerHTML = '<i class="fas fa-moon"></i>'
-        currentTheme.href = "dark-style.css"
+        currentTheme.href = "/dark-style.css"
         let theme = "dark"
         localStorage.setItem("theme", theme)
     } else {
         darkButton.innerHTML = '<i class="far fa-moon"></i>'
-        currentTheme.href = "style.css"
+        currentTheme.href = "/style.css"
         let theme = "light"
         localStorage.setItem("theme", theme)
     }
