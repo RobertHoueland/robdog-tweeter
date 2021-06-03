@@ -1,4 +1,4 @@
-# node-js-getting-started
+# robdog-tweeter
 
 # https://robdog-tweeter.herokuapp.com/
 
