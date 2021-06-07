@@ -168,11 +168,14 @@ function doSearchUpdate() {
      * Loop through the collection of all twits and add twits back into the DOM
      * if they match the current search query.
      */
-    allTwits.forEach(function (twit) {
-        if (twitMatchesSearchQuery(twit, searchQuery)) {
-            insertNewTwit(twit.text, twit.author, twit.time)
-        }
-    })
+    allTwits
+        .slice()
+        .reverse()
+        .forEach(function (twit) {
+            if (twitMatchesSearchQuery(twit, searchQuery)) {
+                insertNewTwit(twit.text, twit.author, twit.time)
+            }
+        })
 }
 
 /*
@@ -220,6 +223,7 @@ function darkToggle() {
  * Wait until the DOM content is loaded, and then hook up UI interactions, etc.
  */
 window.addEventListener("DOMContentLoaded", function () {
+    clearTwitInputValues()
     // Remember all of the existing twits in an array that we can use for search.
     var twitElemsCollection = document.getElementsByClassName("twit")
     for (var i = 0; i < twitElemsCollection.length; i++) {
@@ -260,6 +264,7 @@ window.addEventListener("DOMContentLoaded", function () {
     var searchInput = document.getElementById("navbar-search-input")
     if (searchInput) {
         searchInput.addEventListener("input", doSearchUpdate)
+        searchInput.value = ""
     }
 
     const currentTheme = localStorage.getItem("theme")
