@@ -1,4 +1,4 @@
-# robdog-tweeter
+# Tweeter
 
 # https://robdog-tweeter.herokuapp.com/
 
