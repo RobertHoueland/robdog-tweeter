@@ -15,7 +15,7 @@ This application supports the [Getting Started on Heroku with Node.js](https://d
 Make sure you have [Node.js](http://nodejs.org/) and the [Heroku CLI](https://cli.heroku.com/) installed.
 
 ```sh
-$ git clone https://github.com/TheRobdog/robdog-tweeter/ # or clone your own fork
+$ git clone `THIS REPO` # or clone your own fork
 $ cd robdog-tweeter
 $ npm install
 $ npm start
