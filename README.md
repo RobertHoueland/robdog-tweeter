@@ -1,10 +1,8 @@
 # Tweeter
 
-# https://robdog-tweeter.herokuapp.com/
+Website built in Node,js where users can post twits. Twits are saved on MongoDB.
 
-Node.js site called tweeter hosted on Heroku and uses MongoDB. Originally a class project provided by professor, which I implemented further. All twits are public and can be created by anyone.
-
-Provides live search functionality, adding new twits with author and text (and alert if you haven't fileld both fields). Dark mode button also supported, and remembers your choice stored locally. 404 page is supported, and go to /twits/n replacing "n" with a number starting at 0 to view a page with that single twit. 
+Provides live search functionality, button to add new twits with author and text (and alert if you haven't fileld both fields). Dark mode button also supported, and remembers your choice stored locally. 404 page is supported, and ability to go to /twits/n replacing "n" with a number starting at 0 to view a page with that single twit. 
 
 #
 
@@ -32,16 +30,3 @@ $ heroku create
 $ git push heroku main
 $ heroku open
 ```
-or
-
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-
-## Documentation
-
-For more information about using Node.js on Heroku, see these Dev Center articles:
-
-- [Getting Started on Heroku with Node.js](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
-- [Heroku Node.js Support](https://devcenter.heroku.com/articles/nodejs-support)
-- [Node.js on Heroku](https://devcenter.heroku.com/categories/nodejs)
-- [Best Practices for Node.js Development](https://devcenter.heroku.com/articles/node-best-practices)
-- [Using WebSockets on Heroku with Node.js](https://devcenter.heroku.com/articles/node-websockets)
