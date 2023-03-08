@@ -11,13 +11,7 @@ var mongoClient = require("mongodb").MongoClient
 const { nextTick } = require("process")
 var mongoUser = process.env.MONGO_USER
 var mongoPassword = process.env.MONGO_PASSWORD
-var mongoURL =
-    process.env.MONGODB_URL ||
-    "mongodb+srv://" +
-        mongoUser +
-        ":" +
-        mongoPassword +
-        "@cluster0.etpfv.mongodb.net/test?retryWrites=true&w=majority?authSource=admin"
+var mongoURL = process.env.MONGODB_URL
 var db
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }))
@@ -31,9 +25,9 @@ app.use(express.static("public"))
 app.get("/", function (req, res) {
     console.log(
         "== Request from " +
-            req.socket.remoteAddress +
-            " " +
-            req.header("user-agent")
+        req.socket.remoteAddress +
+        " " +
+        req.header("user-agent")
     )
     var twits = db.collection("twits")
     var mySort = { _id: -1 }
@@ -69,15 +63,15 @@ app.post("/create", function (req, res) {
         }
         console.log(
             "== Twit inserted from " +
-                req.socket.remoteAddress +
-                " " +
-                req.header("user-agent") +
-                "\nText: " +
-                req.body.text +
-                "\nAuthor: " +
-                req.body.author +
-                "\nTime: " +
-                req.body.time
+            req.socket.remoteAddress +
+            " " +
+            req.header("user-agent") +
+            "\nText: " +
+            req.body.text +
+            "\nAuthor: " +
+            req.body.author +
+            "\nTime: " +
+            req.body.time
         )
     })
 
@@ -98,9 +92,9 @@ app.get("/twits/:n", function (req, res) {
             } else {
                 console.log(
                     "== 404 Request from " +
-                        req.socket.remoteAddress +
-                        " " +
-                        req.header("user-agent")
+                    req.socket.remoteAddress +
+                    " " +
+                    req.header("user-agent")
                 )
                 res.status(404).render("404")
             }
@@ -116,9 +110,9 @@ app.get("/twits/:n", function (req, res) {
 app.get("*", function (req, res) {
     console.log(
         "== 404 Request from " +
-            req.socket.remoteAddress +
-            " " +
-            req.header("user-agent")
+        req.socket.remoteAddress +
+        " " +
+        req.header("user-agent")
     )
     res.status(404).render("404")
 })

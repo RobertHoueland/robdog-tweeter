@@ -29,7 +29,7 @@
     "devDependencies": {
         "ansi-regex": "^5.0.1",
         "async": ">=2.6.4",
-        "got": "^11.3.0",
+        "got": ">=11.8.5",
         "nodemon": "^2.0.7",
         "tape": "^4.7.0"
     },
